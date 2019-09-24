@@ -43,7 +43,7 @@ data "aws_route_table" "requestor" {
 # Lookup requestor subnets
 data "aws_subnet_ids" "requestor" {
   count  = "${var.enabled == "true" ? 1 : 0}"
-  vpc_id = "${data.aws_vpc.requestor.id}"
+  vpc_id = "${data.aws_vpc.requestor[0].id}"
 }
 
 # Lookup acceptor VPC so that we can reference the CIDR
@@ -56,7 +56,7 @@ data "aws_vpc" "acceptor" {
 # Lookup acceptor subnets
 data "aws_subnet_ids" "acceptor" {
   count  = "${var.enabled == "true" ? 1 : 0}"
-  vpc_id = "${data.aws_vpc.acceptor.id}"
+  vpc_id = "${data.aws_vpc.acceptor[0].id}"
 }
 
 # Lookup acceptor route tables
